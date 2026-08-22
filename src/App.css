@@ -1,98 +1,90 @@
-* {
-  box-sizing: border-box;
+.products-section {
+  padding: 50px 20px;
+  background-color: #f9fafb;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+.section-container {
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
-nav {
-  height: 70px;
+.section-header {
   display: flex;
-  align-items: center;
-  gap: 25px;
-  padding: 0 40px;
-  background-color: white;
-  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
-nav h2 {
-  color: red;
-  margin-right: 20px;
+.section-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 4px 0;
 }
 
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-size: 15px;
+.section-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
 }
 
-nav a:hover {
-  color: red;
+.category-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-nav input {
-  margin-left: auto;
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-nav button {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+.pill-btn {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.hero {
-  background-color: #ed1c24;
-  color: white;
-  min-height: 350px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  padding: 40px;
+.pill-btn:hover {
+  border-color: #c6101b;
+  color: #c6101b;
 }
 
-.hero h1 {
-  font-size: 30px;
-  margin: 0;
+.pill-btn.active {
+  background: #c6101b;
+  color: #ffffff;
+  border-color: #c6101b;
 }
 
-.hero h2 {
-  font-size: 50px;
-  margin: 10px 0;
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
 }
 
-.hero p {
+.no-products {
+  background: #ffffff;
+  padding: 60px 20px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px dashed #d1d5db;
+}
+
+.no-products p {
   font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 16px;
 }
 
-.hero button {
-  padding: 12px 20px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.hero button:first-of-type {
-  background: white;
-  color: red;
-}
-
-.hero button:last-of-type {
-  background: #222;
+.reset-btn {
+  background: #c6101b;
   color: white;
-}
-
-.hero-image {
-  font-size: 70px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
 }
