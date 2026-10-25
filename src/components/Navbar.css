@@ -59,7 +59,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  background-color: #fff;
+  background-color: #ffffff;
   max-width: 1240px;
   margin: 0 auto;
 }
@@ -69,78 +69,131 @@
   align-items: center;
 }
 
-.navbar-logo {
+.navbar-logo-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none;
+  text-align: left;
 }
 
-.brand-badge-circle {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #c6101b 0%, #900c10 100%);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 3px 8px rgba(198, 16, 27, 0.3);
+.navbar-logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
 }
 
-.brand-badge-text {
-  font-size: 11px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.5px;
-}
-
-.brand-badge-sub {
-  font-size: 8px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.5px;
-  color: #ffeb3b;
-}
-
-.brand-text-block {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand-title {
-  font-size: 19px;
-  font-weight: 900;
-  color: #c6101b;
-  letter-spacing: 0.5px;
-  line-height: 1.1;
-}
-
-.brand-subtitle {
-  font-size: 11px;
-  font-weight: 600;
-  color: #6b7280;
-  letter-spacing: 0.2px;
+.navbar-logo-btn:hover .navbar-logo-img {
+  transform: scale(1.05);
 }
 
 .navbar-links {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   align-items: center;
 }
 
-.navbar-links a {
-  text-decoration: none;
+.nav-link-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   color: #374151;
   font-weight: 600;
-  font-size: 14px;
-  transition: color 0.2s ease;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.navbar-links a:hover,
-.navbar-links a.active {
+.nav-link-btn:hover {
   color: #c6101b;
+  background-color: #fdebee !important;
+}
+
+.nav-link-btn.active {
+  color: #c6101b !important;
+  background-color: #fdebee !important;
+  font-weight: 800;
+}
+
+/* Categories Dropdown Styling */
+.nav-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.categories-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 250px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #f3f4f6;
+  padding: 8px;
+  z-index: 1100;
+  animation: dropdownFadeIn 0.2s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  width: 100%;
+  text-align: left;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  appearance: none;
+}
+
+.dropdown-item:hover {
+  background-color: #fdebee !important;
+  color: #c6101b;
+}
+
+.dropdown-item.all-item {
+  font-weight: 800;
+  color: #c6101b;
+}
+
+.dropdown-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 6px 0;
 }
 
 .navbar-actions {
@@ -158,7 +211,7 @@
   background-color: #f9fafb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
-  width: 250px;
+  width: 240px;
 }
 
 .navbar-search:focus-within {
@@ -214,6 +267,11 @@
   padding: 6px;
   display: flex;
   align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.cart-wrapper:hover {
+  transform: scale(1.08);
 }
 
 .cart-img {
@@ -253,7 +311,7 @@
     width: 180px;
   }
   .navbar-links {
-    gap: 14px;
+    gap: 8px;
   }
 }
 
@@ -281,5 +339,6 @@
     padding: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     border-top: 1px solid #f3f4f6;
+    align-items: stretch;
   }
 }

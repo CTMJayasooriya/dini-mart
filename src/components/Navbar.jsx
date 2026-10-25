@@ -1,10 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.jpg";
 import cartIcon from "../assets/shopping-cart.png";
+import { categories } from "../data/categories";
 import "./Navbar.css";
 
-function Navbar({ searchTerm, setSearchTerm, cartCount = 0, onCategoryClick }) {
+function Navbar({ 
+  searchTerm, 
+  setSearchTerm, 
+  cartCount = 0, 
+  onCategoryClick, 
+  onOpenCart,
+  activeSection = "home"
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState(activeSection);
+
+  useEffect(() => {
+    setActiveNav(activeSection);
+  }, [activeSection]);
+
+  const handleNavClick = (sectionId, categoryId = null) => {
+    setActiveNav(sectionId);
+    setMobileMenuOpen(false);
+    setDropdownOpen(false);
+
+    if (categoryId && onCategoryClick) {
+      onCategoryClick(categoryId);
+    } else if (sectionId === "shop" && onCategoryClick) {
+      onCategoryClick("all");
+    }
+
+    if (sectionId === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <header className="header-wrapper">
@@ -15,11 +50,11 @@ function Navbar({ searchTerm, setSearchTerm, cartCount = 0, onCategoryClick }) {
             <span>🎉 Welcome to <strong>Dini Mart</strong> - Cake Tools & Gift Store!</span>
           </div>
           <div className="top-bar-right">
-            <a href="tel:0773584730" className="top-phone">
+            <a href="tel:0771367348" className="top-phone">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="top-icon">
                 <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
               </svg>
-              077 358 4730
+              077 136 7348
             </a>
             <span className="divider">|</span>
             <span className="top-info">Island-wide Delivery 🚚</span>
@@ -30,25 +65,85 @@ function Navbar({ searchTerm, setSearchTerm, cartCount = 0, onCategoryClick }) {
       {/* Main Navigation Bar */}
       <nav className="navbar">
         <div className="navbar-left">
-          <a href="/" className="navbar-logo">
-            <div className="brand-badge-circle">
-              <span className="brand-badge-text">DINI</span>
-              <span className="brand-badge-sub">MART</span>
-            </div>
-            <div className="brand-text-block">
-              <span className="brand-title">DINI MART</span>
-              <span className="brand-subtitle">Cake Tools & Gift Store</span>
-            </div>
-          </a>
+          <button 
+            className="navbar-logo-btn" 
+            onClick={() => handleNavClick("home")}
+          >
+            <img src={logo} alt="Dini Mart - Cake Tools & Gift Store" className="navbar-logo-img" />
+          </button>
         </div>
 
         <div className={`navbar-links ${mobileMenuOpen ? "open" : ""}`}>
-          <a href="/" className="active">Home</a>
-          <a href="#shop" onClick={() => onCategoryClick && onCategoryClick("all")}>Shop</a>
-          <a href="#categories" onClick={() => onCategoryClick && onCategoryClick("all")}>Categories ▾</a>
-          <a href="#offers">Offers</a>
-          <a href="#about">About Us</a>
-          <a href="#contact">Contact Us</a>
+          <button 
+            className={`nav-link-btn ${activeNav === "home" ? "active" : ""}`}
+            onClick={() => handleNavClick("home")}
+          >
+            Home
+          </button>
+
+          <button 
+            className={`nav-link-btn ${activeNav === "shop" ? "active" : ""}`}
+            onClick={() => handleNavClick("shop")}
+          >
+            Shop
+          </button>
+
+          {/* Categories Dropdown */}
+          <div 
+            className="nav-dropdown-wrapper"
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+          >
+            <button 
+              className={`nav-link-btn ${activeNav === "categories" ? "active" : ""}`}
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              Categories ▾
+            </button>
+
+            {dropdownOpen && (
+              <div className="categories-dropdown-menu">
+                <button 
+                  className="dropdown-item all-item"
+                  onClick={() => handleNavClick("shop", "all")}
+                >
+                  ✨ View All Categories
+                </button>
+                <div className="dropdown-divider"></div>
+                {categories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    className="dropdown-item"
+                    onClick={() => handleNavClick("shop", cat.id)}
+                  >
+                    <img src={cat.image} alt={cat.name} className="dropdown-icon" />
+                    <span>{cat.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <button 
+            className={`nav-link-btn ${activeNav === "offers" ? "active" : ""}`}
+            onClick={() => handleNavClick("offers")}
+          >
+            Offers
+          </button>
+
+          <button 
+            className={`nav-link-btn ${activeNav === "about" ? "active" : ""}`}
+            onClick={() => handleNavClick("about")}
+          >
+            About Us
+          </button>
+
+          <button 
+            className={`nav-link-btn ${activeNav === "contact" ? "active" : ""}`}
+            onClick={() => handleNavClick("contact")}
+          >
+            Contact Us
+          </button>
         </div>
 
         <div className="navbar-actions">
@@ -58,8 +153,9 @@ function Navbar({ searchTerm, setSearchTerm, cartCount = 0, onCategoryClick }) {
               placeholder="Search cake tools, gifts..." 
               value={searchTerm || ""}
               onChange={(e) => setSearchTerm && setSearchTerm(e.target.value)}
+              onFocus={() => handleNavClick("shop")}
             />
-            <button aria-label="Search">
+            <button aria-label="Search" onClick={() => handleNavClick("shop")}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -77,7 +173,13 @@ function Navbar({ searchTerm, setSearchTerm, cartCount = 0, onCategoryClick }) {
           </div>
 
           <div className="navbar-icons">
-            <div className="cart-wrapper">
+            <div 
+              className="cart-wrapper" 
+              onClick={onOpenCart} 
+              title="Open Shopping Cart"
+              role="button"
+              tabIndex={0}
+            >
               <img src={cartIcon} alt="Shopping Cart Icon" className="cart-img" />
               {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../assets/logo.jpg";
 import "./Footer.css";
 
 function Footer() {
@@ -7,8 +8,7 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-column brand-col">
           <div className="footer-brand">
-            <span className="brand-badge-circle-sm">D</span>
-            <span className="footer-brand-title">DINI MART</span>
+            <img src={logo} alt="Dini Mart" className="footer-logo-img" />
           </div>
           <p className="footer-tagline">Cake Tools & Gift Store</p>
           <p className="footer-desc">
@@ -18,7 +18,7 @@ function Footer() {
           <div className="footer-contact-info">
             <div className="contact-item">
               <span className="contact-icon">📞</span>
-              <a href="tel:0773584730" className="contact-link">077 358 4730</a>
+              <a href="tel:0771367348" className="contact-link">077 136 7348</a>
             </div>
             <div className="contact-item">
               <span className="contact-icon">📍</span>
